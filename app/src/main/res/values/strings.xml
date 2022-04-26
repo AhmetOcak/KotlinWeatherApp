@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">KotlinWeatherApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_button_content">search</string>
+    <string name="enter_city_name">Enter city name</string>
+    <string name="find">Find</string>
+    <string name="back">back</string>
+
 </resources>
