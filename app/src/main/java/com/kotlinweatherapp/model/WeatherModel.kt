@@ -4,5 +4,5 @@ data class WeatherModel(
     val main: Main,
     val wind: Wind,
     val weather: Weather,
-    val sys: SYS,
+    val sys: Sys,
 )
