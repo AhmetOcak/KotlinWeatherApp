@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.model
+package com.kotlinweatherapp.data
 
 data class Sys(
     val sunrise: Long,
