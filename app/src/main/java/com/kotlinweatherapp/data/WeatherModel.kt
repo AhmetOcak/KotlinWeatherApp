@@ -1,8 +1,8 @@
-package com.kotlinweatherapp.model
+package com.kotlinweatherapp.data
 
 data class WeatherModel(
     val main: Main,
     val wind: Wind,
-    val weather: Weather,
+    val weather: List<Weather>,
     val sys: Sys,
 )
