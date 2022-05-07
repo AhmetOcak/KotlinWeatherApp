@@ -4,5 +4,11 @@
     <string name="enter_city_name">Enter city name</string>
     <string name="find">Find</string>
     <string name="back">back</string>
+    <string name="feels_like">feels like</string>
+    <string name="wind_speed">wind speed</string>
+    <string name="humidity">humidity</string>
+    <string name="sunrise">sunrise</string>
+    <string name="sunset">sunset</string>
+    <string name="pressure">pressure</string>
 
 </resources>
