@@ -2,8 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
+
         <variable
             name="viewModel"
             type="com.kotlinweatherapp.viewmodels.WeatherViewModel" />
@@ -15,9 +16,9 @@
 
         <ImageButton
             android:id="@+id/searchButton"
+            style="@style/imageButtonStyle"
             android:contentDescription="@string/search_button_content"
             android:src="@drawable/ic_baseline_search"
-            style="@style/imageButtonStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"
@@ -28,7 +29,7 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="İstanbul"
+            android:text="@{viewModel.cityName}"
             android:textColor="@color/white"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +43,7 @@
             android:id="@+id/temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="6°"
+            android:text="@{viewModel.temp}"
             android:textColor="@color/white"
             android:textSize="96sp"
             android:textStyle="bold"
@@ -58,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:rotation="90"
-            tools:text="light rain"
+            android:text="@{viewModel.description}"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,59 +91,137 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView4"
-                    style="@style/weatherInfoTextStyle"
+                <LinearLayout
+                    android:id="@+id/feels_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
-                    android:text="TextView"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView7"
-                    style="@style/weatherInfoTextStyle"
+                    <TextView
+                        style="@style/weatherDataTextStyle"
+                        android:text="@{viewModel.feelsLike + `°`}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/weatherInfoTextStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/feels_like" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toStartOf="@+id/textView99"
-                    app:layout_constraintStart_toEndOf="@+id/textView4"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@id/pressure"
+                    app:layout_constraintStart_toEndOf="@id/feels_like"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView10"
-                    style="@style/weatherInfoTextStyle"
+                    <TextView
+                        style="@style/weatherDataTextStyle"
+                        android:text="@{viewModel.windSpeed + ` km/h`}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/weatherInfoTextStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/wind_speed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="32dp"
-                    android:text="TextView"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView11"
-                    app:layout_constraintStart_toEndOf="@+id/textView5" />
+                    app:layout_constraintEnd_toStartOf="@id/sunset"
+                    app:layout_constraintStart_toEndOf="@id/sunrise">
 
-                <TextView
-                    android:id="@+id/textView5"
-                    style="@style/weatherInfoTextStyle"
+                    <TextView
+                        style="@style/weatherDataTextStyle"
+                        android:text="@{viewModel.humidity + ` mb`}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/weatherInfoTextStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/humidity" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sunrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginBottom="32dp"
-                    android:text="TextView"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/textView11"
-                    style="@style/weatherInfoTextStyle"
+                    <TextView
+                        style="@style/weatherDataTextStyle"
+                        android:text="@{viewModel.sunrise}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/weatherInfoTextStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/sunrise" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/sunset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="32dp"
-                    android:text="TextView"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent">
 
-                <TextView
-                    android:id="@+id/textView99"
-                    style="@style/weatherInfoTextStyle"
+                    <TextView
+                        style="@style/weatherDataTextStyle"
+                        android:text="@{viewModel.sunset}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/weatherInfoTextStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/sunset" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
-                    android:text="TextView"
+                    android:gravity="center"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        style="@style/weatherDataTextStyle"
+                        android:text="@{viewModel.pressure + ` %`}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/weatherInfoTextStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/pressure" />
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
