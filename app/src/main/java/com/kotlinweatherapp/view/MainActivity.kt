@@ -12,15 +12,10 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var model: Response<WeatherModel>
+    private lateinit var model: WeatherModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        lifecycleScope.launch {
-            model = RetrofitInstance.getWeatherData("ankara")
-            Log.e("e", model.body().toString())
-        }
     }
 }

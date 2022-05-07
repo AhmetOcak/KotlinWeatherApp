@@ -5,4 +5,5 @@ data class WeatherModel(
     val wind: Wind,
     val weather: List<Weather>,
     val sys: Sys,
+    val name: String,
 )
