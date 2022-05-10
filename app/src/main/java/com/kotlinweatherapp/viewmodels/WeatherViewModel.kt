@@ -10,9 +10,9 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherViewModel : ViewModel() {
+class WeatherViewModel(city: String) : ViewModel() {
 
-    private val _cityName = MutableLiveData<String>()
+    private val _cityName = MutableLiveData(city)
     val cityName: LiveData<String> get() = _cityName
 
     private val _temp = MutableLiveData<String>()
@@ -40,23 +40,26 @@ class WeatherViewModel : ViewModel() {
     val pressure: LiveData<String> get() = _pressure
 
     init {
+        getWeatherData()
+    }
+
+    private fun getWeatherData() {
         viewModelScope.launch {
-            RetrofitInstance.getWeatherData("ankara").body()?.let { setWeatherData(it) }
+            RetrofitInstance.getWeatherData(_cityName.value.toString()).body()?.let { setWeatherData(it) }
         }
     }
 
     private fun readTimestamp(timestamp: Long): String? {
-        val formatter = SimpleDateFormat("hh:mm aa")
+        val formatter = SimpleDateFormat("hh:mm")
         val calendar: Calendar = Calendar.getInstance()
         calendar.timeInMillis = timestamp * 1000L
-        calendar.add(Calendar.HOUR, 3)
         return formatter.format(calendar.time)
     }
 
     private fun setWeatherData(weatherModel: WeatherModel) {
         _cityName.value = weatherModel.name
         _description.value = weatherModel.weather[0].description
-        _temp.value = weatherModel.main.temp.toInt().toString() + "°"
+        _temp.value = weatherModel.main.temp.toInt().toString()
         _feelsLike.value = weatherModel.main.feels_like.toInt().toString()
         _windSpeed.value = weatherModel.wind.speed.toInt().toString()
         _humidity.value = weatherModel.main.humidity.toString()
@@ -64,5 +67,4 @@ class WeatherViewModel : ViewModel() {
         _sunset.value = readTimestamp(weatherModel.sys.sunset)!!
         _pressure.value = weatherModel.main.pressure.toInt().toString()
     }
-
 }
