@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_weatherFragment_to_searchCityFragment"
             app:destination="@id/searchCityFragment" />
+        <argument
+            android:name="cityName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchCityFragment"
-        android:name="com.kotlinweatherapp.ui.searchcityscreen.SearchCityFragment"
-        android:label="fragment_search_city"
-        tools:layout="@layout/fragment_search_city" />
+        android:name="com.kotlinweatherapp.view.SearchCityFragment"
+        android:label="fragment_search_city" >
+        <action
+            android:id="@+id/action_searchCityFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment"
+            app:popUpTo="@id/weatherFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
