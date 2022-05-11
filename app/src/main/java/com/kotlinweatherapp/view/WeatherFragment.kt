@@ -25,7 +25,7 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentWeatherBinding.inflate(inflater)
-        cityName = requireArguments().getString("cityName") ?: "Ankara"
+        cityName = requireArguments().getString("cityName") ?: "Washington"
 
         val weatherViewModelFactory =
             WeatherViewModelFactory(cityName)

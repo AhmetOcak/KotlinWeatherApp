@@ -10,5 +10,6 @@
     <string name="sunrise">sunrise</string>
     <string name="sunset">sunset</string>
     <string name="pressure">pressure</string>
+    <string name="city_not_found">City not found</string>
 
 </resources>

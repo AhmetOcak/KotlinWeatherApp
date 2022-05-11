@@ -2,8 +2,6 @@ package com.kotlinweatherapp.api
 
 import com.kotlinweatherapp.data.WeatherModel
 import com.kotlinweatherapp.utilities.Constants
-import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
