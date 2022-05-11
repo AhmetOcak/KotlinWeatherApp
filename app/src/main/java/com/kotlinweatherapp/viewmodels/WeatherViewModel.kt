@@ -42,10 +42,10 @@ class WeatherViewModel(city: String) : ViewModel() {
     private val _pressure = MutableLiveData("")
     val pressure: LiveData<String> get() = _pressure
 
-    private val _viewVisibility = MutableLiveData<Int?>()
+    private val _viewVisibility = MutableLiveData(View.GONE)
     val viewVisibility: LiveData<Int?> get() = _viewVisibility
 
-    private val _errorMessageVisibility = MutableLiveData<Int?>()
+    private val _errorMessageVisibility = MutableLiveData(View.GONE)
     val errorMessageVisibility: LiveData<Int?> get() = _errorMessageVisibility
 
     private val _data = MutableLiveData<Response<WeatherModel>>()
