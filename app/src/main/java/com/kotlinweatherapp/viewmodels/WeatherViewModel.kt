@@ -60,7 +60,6 @@ class WeatherViewModel(city: String) : ViewModel() {
     private fun getWeatherData() {
         viewModelScope.launch {
             _data.value = RetrofitInstance.getWeatherData(_cityName.value.toString())
-            Log.e("data", _data.value.toString())
             checkDataAvailable()
         }
     }
