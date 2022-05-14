@@ -1,5 +1,6 @@
 package com.kotlinweatherapp.viewmodels
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,8 @@ import com.kotlinweatherapp.data.WeatherModel
 import com.kotlinweatherapp.utilities.Status
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.lang.Exception
+import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,8 +66,21 @@ class WeatherViewModel(city: String) : ViewModel() {
     private fun getWeatherData() {
         viewModelScope.launch {
             _status.value = Status.LOADING
-            _data.value = RetrofitInstance.getWeatherData(_cityName.value.toString())
-            checkDataAvailable()
+            try {
+                _data.value = RetrofitInstance.getWeatherData(_cityName.value.toString())
+                checkDataAvailable()
+            }
+            catch (e: UnknownHostException) {
+                _status.value = Status.ERROR
+                _viewVisibility.value = View.GONE
+                _errorMessageVisibility.value = View.VISIBLE
+                _errorText.value = "No internet connection"
+            }catch (e: Exception) {
+                _status.value = Status.ERROR
+                _viewVisibility.value = View.GONE
+                _errorMessageVisibility.value = View.VISIBLE
+                _errorText.value = "Something went wrong"
+            }
         }
     }
 
