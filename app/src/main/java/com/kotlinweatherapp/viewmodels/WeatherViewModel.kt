@@ -1,6 +1,5 @@
 package com.kotlinweatherapp.viewmodels
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,12 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinweatherapp.api.RetrofitInstance
 import com.kotlinweatherapp.data.WeatherModel
+import com.kotlinweatherapp.utilities.Status
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
-
-enum class Status { LOADING, ERROR, DONE }
 
 class WeatherViewModel(city: String) : ViewModel() {
 

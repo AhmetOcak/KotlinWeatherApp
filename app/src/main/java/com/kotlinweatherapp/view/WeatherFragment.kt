@@ -5,13 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
-import com.kotlinweatherapp.viewmodels.Status
+import com.kotlinweatherapp.utilities.Status
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
 import com.kotlinweatherapp.viewmodels.WeatherViewModelFactory
 
