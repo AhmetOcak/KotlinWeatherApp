@@ -13,6 +13,8 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
+enum class Status { LOADING, ERROR, DONE }
+
 class WeatherViewModel(city: String) : ViewModel() {
 
     private val _cityName = MutableLiveData(city)
@@ -48,6 +50,9 @@ class WeatherViewModel(city: String) : ViewModel() {
     private val _errorMessageVisibility = MutableLiveData(View.GONE)
     val errorMessageVisibility: LiveData<Int?> get() = _errorMessageVisibility
 
+    private val _status = MutableLiveData<Status>()
+    val status: LiveData<Status> get() = _status
+
     private val _data = MutableLiveData<Response<WeatherModel>>()
 
     private val _errorText = MutableLiveData<String>()
@@ -59,6 +64,7 @@ class WeatherViewModel(city: String) : ViewModel() {
 
     private fun getWeatherData() {
         viewModelScope.launch {
+            _status.value = Status.LOADING
             _data.value = RetrofitInstance.getWeatherData(_cityName.value.toString())
             checkDataAvailable()
         }
@@ -86,16 +92,19 @@ class WeatherViewModel(city: String) : ViewModel() {
     private fun checkDataAvailable() {
         when {
             _data.value?.code() == 200 -> {
+                _status.value = Status.DONE
                 _viewVisibility.value = View.VISIBLE
                 _errorMessageVisibility.value = View.GONE
                 setWeatherData(_data.value!!.body()!!)
             }
             _data.value?.code() == 404 -> {
+                _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorText.value = "City not found"
                 _errorMessageVisibility.value = View.VISIBLE
             }
             _data.value?.code() == 401 -> {
+                _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorText.value = "Unauthorized"
                 _errorMessageVisibility.value = View.VISIBLE
