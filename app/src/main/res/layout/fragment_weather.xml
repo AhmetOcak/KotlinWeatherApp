@@ -12,6 +12,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -35,9 +36,9 @@
             android:id="@+id/searchButton"
             style="@style/imageButtonStyle"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/search_button_content"
             android:src="@drawable/ic_baseline_search"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +46,7 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:text="@{viewModel.cityName}"
             android:textColor="@color/white"
             android:textSize="34sp"
@@ -59,7 +60,7 @@
             android:id="@+id/temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:text="@{viewModel.temp + `°`}"
             android:textColor="@color/white"
@@ -73,7 +74,7 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:text="@{viewModel.description}"
             android:textColor="@color/white"
