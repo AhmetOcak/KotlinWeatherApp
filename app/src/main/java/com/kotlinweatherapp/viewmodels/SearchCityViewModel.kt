@@ -11,7 +11,4 @@ class SearchCityViewModel: ViewModel() {
     var isCanGo = Transformations.map(currentText) {
         !currentText.value.isNullOrEmpty()
     }
-
-
-
 }

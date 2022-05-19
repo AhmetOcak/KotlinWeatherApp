@@ -1,7 +1,8 @@
-package com.kotlinweatherapp.viewmodels
+package com.kotlinweatherapp.data
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.kotlinweatherapp.viewmodels.WeatherViewModel
 import java.lang.IllegalArgumentException
 
 class WeatherViewModelFactory(private val city: String) : ViewModelProvider.Factory {

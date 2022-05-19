@@ -11,7 +11,7 @@ import com.kotlinweatherapp.R
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
 import com.kotlinweatherapp.utilities.Status
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
-import com.kotlinweatherapp.viewmodels.WeatherViewModelFactory
+import com.kotlinweatherapp.data.WeatherViewModelFactory
 
 
 class WeatherFragment : Fragment() {

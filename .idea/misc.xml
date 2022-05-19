@@ -8,6 +8,7 @@
         <entry key="..\:/Users/ahmet/KotlinWeatherApp/app/src/main/res/drawable/ic_baseline_search.xml" value="0.219" />
         <entry key="..\:/Users/ahmet/KotlinWeatherApp/app/src/main/res/drawable/lightbg.xml" value="0.3425" />
         <entry key="..\:/Users/ahmet/KotlinWeatherApp/app/src/main/res/layout/activity_main.xml" value="0.3697916666666667" />
+        <entry key="..\:/Users/ahmet/KotlinWeatherApp/app/src/main/res/layout/fragment_get_location.xml" value="0.33061594202898553" />
         <entry key="..\:/Users/ahmet/KotlinWeatherApp/app/src/main/res/layout/fragment_search_city.xml" value="0.3697916666666667" />
         <entry key="..\:/Users/ahmet/KotlinWeatherApp/app/src/main/res/layout/fragment_weather.xml" value="0.3697916666666667" />
       </map>

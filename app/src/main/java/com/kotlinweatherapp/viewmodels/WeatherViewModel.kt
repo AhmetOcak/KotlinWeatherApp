@@ -1,13 +1,12 @@
 package com.kotlinweatherapp.viewmodels
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kotlinweatherapp.api.RetrofitInstance
 import com.kotlinweatherapp.data.WeatherModel
+import com.kotlinweatherapp.data.WeatherRepository
 import com.kotlinweatherapp.utilities.Status
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -17,6 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WeatherViewModel(city: String) : ViewModel() {
+
+    private val weatherRepository = WeatherRepository()
 
     private val _cityName = MutableLiveData(city)
     val cityName: LiveData<String> get() = _cityName
@@ -60,17 +61,16 @@ class WeatherViewModel(city: String) : ViewModel() {
     val errorText: LiveData<String> get() = _errorText
 
     init {
-        getWeatherData()
+        getData()
     }
 
-    private fun getWeatherData() {
+    private fun getData() {
         viewModelScope.launch {
             _status.value = Status.LOADING
             try {
-                _data.value = RetrofitInstance.getWeatherData(_cityName.value.toString())
+                _data.value = weatherRepository.getWeatherData(_cityName.value.toString())
                 checkDataAvailable()
-            }
-            catch (e: UnknownHostException) {
+            }catch (e: UnknownHostException) {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorMessageVisibility.value = View.VISIBLE
