@@ -1,5 +1,6 @@
 package com.kotlinweatherapp.api
 
+import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.data.WeatherModel
 import com.kotlinweatherapp.utilities.Constants
 import retrofit2.Response
@@ -18,8 +19,17 @@ object RetrofitInstance {
             .create(WeatherApi::class.java)
     }
 
-    suspend fun getWeatherData(cityName: String): Response<WeatherModel> {
-        return api.getWeatherData(cityName, Constants.API_KEY, Constants.UNITS)
+    suspend fun getWeatherDataWithCityName(cityName: String): Response<WeatherModel> {
+        return api.getWeatherDataWithCityName(cityName, Constants.API_KEY, Constants.UNITS)
+    }
+
+    suspend fun getWeatherDataWithLocation(locationData: LocationData): Response<WeatherModel> {
+        return api.getWeatherDataWithLocation(
+            locationData.latitude,
+            locationData.longitude,
+            Constants.API_KEY,
+            Constants.UNITS
+        )
     }
 }
 
