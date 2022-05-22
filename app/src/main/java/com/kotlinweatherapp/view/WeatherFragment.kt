@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
@@ -14,6 +16,7 @@ import com.kotlinweatherapp.utilities.Status
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
 import com.kotlinweatherapp.data.WeatherViewModelFactory
 import com.kotlinweatherapp.utilities.Constants
+import kotlin.system.exitProcess
 
 
 class WeatherFragment : Fragment() {
@@ -33,9 +36,14 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cityName = requireArguments().getString("cityName") ?: Constants.CITY_NAME_NULL
+        onBackHandler()
+
+        cityName = requireArguments().getString(Constants.CITY_NAME) ?: Constants.CITY_NAME_NULL
         locationData =
-            (requireArguments().getSerializable(Constants.LOCATION_DATA) ?: LocationData(0.0, 0.0)) as LocationData
+            (requireArguments().getSerializable(Constants.LOCATION_DATA) ?: LocationData(
+                0.0,
+                0.0
+            )) as LocationData
 
         val weatherViewModelFactory =
             WeatherViewModelFactory(cityName, locationData)
@@ -63,5 +71,14 @@ class WeatherFragment : Fragment() {
 
     private fun goToNextScreen() {
         findNavController().navigate(R.id.action_weatherFragment_to_searchCityFragment)
+    }
+
+    private fun onBackHandler() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                ActivityCompat.finishAffinity(requireActivity())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 }
