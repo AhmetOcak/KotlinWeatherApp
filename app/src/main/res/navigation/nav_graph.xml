@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/weatherFragment">
+    app:startDestination="@id/getLocationFragment">
 
     <fragment
         android:id="@+id/weatherFragment"
@@ -16,6 +16,9 @@
         <argument
             android:name="cityName"
             app:argType="string" />
+        <argument
+            android:name="locationData"
+            app:argType="com.kotlinweatherapp.data.LocationData" />
     </fragment>
     <fragment
         android:id="@+id/searchCityFragment"
@@ -26,5 +29,14 @@
             app:destination="@id/weatherFragment"
             app:popUpTo="@id/weatherFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/getLocationFragment"
+        android:name="com.kotlinweatherapp.view.GetLocationFragment"
+        android:label="fragment_get_location"
+        tools:layout="@layout/fragment_get_location" >
+        <action
+            android:id="@+id/action_getLocationFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
     </fragment>
 </navigation>
