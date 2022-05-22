@@ -10,9 +10,20 @@ class WeatherRepository {
 
     private val data = MutableLiveData<Response<WeatherModel>>()
 
-    suspend fun getWeatherData(cityName: String): Response<WeatherModel> {
+    suspend fun getWeatherDataWithCityName(cityName: String): Response<WeatherModel> {
         try {
-            data.value = RetrofitInstance.getWeatherData(cityName)
+            data.value = RetrofitInstance.getWeatherDataWithCityName(cityName)
+            return data.value!!
+        } catch (e: UnknownHostException) {
+            throw e
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    suspend fun getWeatherDataWithLocation(locationData: LocationData): Response<WeatherModel> {
+        try {
+            data.value = RetrofitInstance.getWeatherDataWithLocation(locationData)
             return data.value!!
         } catch (e: UnknownHostException) {
             throw e

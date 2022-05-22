@@ -1,12 +1,15 @@
 package com.kotlinweatherapp.viewmodels
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.data.WeatherModel
 import com.kotlinweatherapp.data.WeatherRepository
+import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.utilities.Status
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -15,7 +18,7 @@ import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherViewModel(city: String) : ViewModel() {
+class WeatherViewModel(city: String, private val locationData: LocationData) : ViewModel() {
 
     private val weatherRepository = WeatherRepository()
 
@@ -68,8 +71,13 @@ class WeatherViewModel(city: String) : ViewModel() {
         viewModelScope.launch {
             _status.value = Status.LOADING
             try {
-                _data.value = weatherRepository.getWeatherData(_cityName.value.toString())
-                checkDataAvailable()
+                if(_cityName.value == Constants.CITY_NAME_NULL) {
+                    _data.value = weatherRepository.getWeatherDataWithLocation(locationData)
+                    checkDataAvailable()
+                }else {
+                    _data.value = weatherRepository.getWeatherDataWithCityName(_cityName.value.toString())
+                    checkDataAvailable()
+                }
             }catch (e: UnknownHostException) {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE

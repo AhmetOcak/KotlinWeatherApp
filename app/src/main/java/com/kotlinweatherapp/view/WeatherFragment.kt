@@ -8,16 +8,19 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
+import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
 import com.kotlinweatherapp.utilities.Status
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
 import com.kotlinweatherapp.data.WeatherViewModelFactory
+import com.kotlinweatherapp.utilities.Constants
 
 
 class WeatherFragment : Fragment() {
 
     private lateinit var viewModel: WeatherViewModel
     private lateinit var cityName: String
+    private lateinit var locationData: LocationData
     private lateinit var binding: FragmentWeatherBinding
 
     override fun onCreateView(
@@ -30,10 +33,12 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cityName = requireArguments().getString("cityName") ?: "Washington"
+        cityName = requireArguments().getString("cityName") ?: Constants.CITY_NAME_NULL
+        locationData =
+            (requireArguments().getSerializable(Constants.LOCATION_DATA) ?: LocationData(0.0, 0.0)) as LocationData
 
         val weatherViewModelFactory =
-            WeatherViewModelFactory(cityName)
+            WeatherViewModelFactory(cityName, locationData)
         viewModel =
             ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
 
