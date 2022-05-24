@@ -1,19 +1,20 @@
 package com.kotlinweatherapp.api
 
 import com.kotlinweatherapp.data.WeatherModel
+import com.kotlinweatherapp.utilities.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApi {
-    @GET("/data/2.5/weather/")
+    @GET(Constants.END_POINT)
     suspend fun getWeatherDataWithCityName(
         @Query("q") cityName: String,
         @Query("APPID") apikey: String,
         @Query("units") units: String,
     ): Response<WeatherModel>
 
-    @GET("/data/2.5/weather/")
+    @GET(Constants.END_POINT)
     suspend fun getWeatherDataWithLocation(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,

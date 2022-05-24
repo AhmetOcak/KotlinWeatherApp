@@ -2,6 +2,7 @@ package com.kotlinweatherapp.data
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
 import java.lang.IllegalArgumentException
 
@@ -11,7 +12,7 @@ class WeatherViewModelFactory(private val city: String, private val locationData
             @Suppress("UNCHECKED_CAST")
             return WeatherViewModel(city, locationData) as T
         } else {
-            throw IllegalArgumentException("Can not create instance of this viewModel")
+            throw IllegalArgumentException(Constants.EXCEPTION_MESSAGE)
         }
     }
 }

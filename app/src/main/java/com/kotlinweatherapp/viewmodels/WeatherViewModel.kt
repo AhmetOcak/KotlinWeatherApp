@@ -1,6 +1,5 @@
 package com.kotlinweatherapp.viewmodels
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.data.WeatherModel
-import com.kotlinweatherapp.data.WeatherRepository
+import com.kotlinweatherapp.data.repo.WeatherRepository
 import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.utilities.Status
 import kotlinx.coroutines.launch
@@ -71,7 +70,7 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
         viewModelScope.launch {
             _status.value = Status.LOADING
             try {
-                if(_cityName.value == Constants.CITY_NAME_NULL) {
+                if(_cityName.value.toString() == Constants.CITY_NAME_NULL) {
                     _data.value = weatherRepository.getWeatherDataWithLocation(locationData)
                     checkDataAvailable()
                 }else {
@@ -82,12 +81,12 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorMessageVisibility.value = View.VISIBLE
-                _errorText.value = "No internet connection"
+                _errorText.value = Constants.INTERNET_CONNECTION_ERROR
             }catch (e: Exception) {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorMessageVisibility.value = View.VISIBLE
-                _errorText.value = "Something went wrong"
+                _errorText.value = Constants.ERROR_MESSAGE
             }
         }
     }
@@ -113,22 +112,22 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
 
     private fun checkDataAvailable() {
         when {
-            _data.value?.code() == 200 -> {
+            _data.value?.code() == Constants.OK_CODE -> {
                 _status.value = Status.DONE
                 _viewVisibility.value = View.VISIBLE
                 _errorMessageVisibility.value = View.GONE
                 setWeatherData(_data.value!!.body()!!)
             }
-            _data.value?.code() == 404 -> {
+            _data.value?.code() == Constants.NOT_FOUND_CODE -> {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
-                _errorText.value = "City not found"
+                _errorText.value = Constants.CITY_NOT_FOUND_MESSAGE
                 _errorMessageVisibility.value = View.VISIBLE
             }
-            _data.value?.code() == 401 -> {
+            _data.value?.code() == Constants.UNAUTHORIZED_CODE -> {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
-                _errorText.value = "Unauthorized"
+                _errorText.value = Constants.UNAUTHORIZED_MESSAGE
                 _errorMessageVisibility.value = View.VISIBLE
             }
         }

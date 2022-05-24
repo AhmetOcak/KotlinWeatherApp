@@ -1,7 +1,9 @@
-package com.kotlinweatherapp.data
+package com.kotlinweatherapp.data.repo
 
 import androidx.lifecycle.MutableLiveData
 import com.kotlinweatherapp.api.RetrofitInstance
+import com.kotlinweatherapp.data.LocationData
+import com.kotlinweatherapp.data.WeatherModel
 import retrofit2.Response
 import java.lang.Exception
 import java.net.UnknownHostException

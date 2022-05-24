@@ -10,7 +10,6 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +24,7 @@ import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.databinding.FragmentGetLocationBinding
 import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.viewmodels.GetLocationViewModel
+import kotlin.system.exitProcess
 
 class GetLocationFragment : Fragment() {
 
@@ -140,7 +140,8 @@ class GetLocationFragment : Fragment() {
     ) {
         if (requestCode == Constants.PERMISSION_ID) {
             if (!(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                Log.e("e", "request denied")
+                requireActivity().finish()
+                exitProcess(0)
             }
         }
     }
