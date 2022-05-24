@@ -11,4 +11,6 @@
     <string name="sunset">sunset</string>
     <string name="pressure">pressure</string>
     <string name="city_not_found">City not found</string>
+    <string name="lat_key">latitude</string>
+    <string name="lon_key">longitude</string>
 </resources>
