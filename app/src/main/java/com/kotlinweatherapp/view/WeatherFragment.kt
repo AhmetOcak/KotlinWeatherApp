@@ -1,5 +1,7 @@
 package com.kotlinweatherapp.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -25,6 +27,7 @@ class WeatherFragment : Fragment() {
     private lateinit var cityName: String
     private lateinit var locationData: LocationData
     private lateinit var binding: FragmentWeatherBinding
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +41,10 @@ class WeatherFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         onBackHandler()
 
+        sharedPref = activity?.getSharedPreferences("location_data", Context.MODE_PRIVATE)!!
         cityName = requireArguments().getString(Constants.CITY_NAME) ?: Constants.CITY_NAME_NULL
-        locationData =
-            (requireArguments().getSerializable(Constants.LOCATION_DATA) ?: LocationData(
-                0.0,
-                0.0
-            )) as LocationData
+
+        getLocationData()
 
         val weatherViewModelFactory =
             WeatherViewModelFactory(cityName, locationData)
@@ -80,5 +81,26 @@ class WeatherFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+    }
+
+    private fun getLocationData() {
+        if (requireArguments().getSerializable(Constants.LOCATION_DATA) == null) {
+            locationData = LocationData(
+                sharedPref.getFloat(getString(R.string.lat_key), 0.0F).toDouble(),
+                sharedPref.getFloat(getString(R.string.lon_key), 0.0F).toDouble()
+            )
+        } else {
+            locationData =
+                requireArguments().getSerializable(Constants.LOCATION_DATA) as LocationData
+            setLocDataToSharPref()
+        }
+    }
+
+    private fun setLocDataToSharPref() {
+        with(sharedPref.edit()) {
+            putFloat(getString(R.string.lat_key), locationData.latitude.toFloat())
+            putFloat(getString(R.string.lon_key), locationData.longitude.toFloat())
+            apply()
+        }
     }
 }
