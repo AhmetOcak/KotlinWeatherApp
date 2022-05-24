@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.kotlinweatherapp.viewmodels.WeatherViewModel" />
@@ -48,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="@{viewModel.cityName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="@color/white"
-            android:textSize="34sp"
             android:visibility="@{viewModel.viewVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
