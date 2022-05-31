@@ -24,12 +24,15 @@ import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.databinding.FragmentGetLocationBinding
 import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.viewmodels.GetLocationViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.system.exitProcess
 
+@AndroidEntryPoint
 class GetLocationFragment : Fragment() {
 
     private lateinit var binding: FragmentGetLocationBinding
-    lateinit var mFusedLocationClient: FusedLocationProviderClient
+    @Inject lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val viewModel: GetLocationViewModel by viewModels()
     private lateinit var locationData: LocationData
 
@@ -38,7 +41,6 @@ class GetLocationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGetLocationBinding.inflate(inflater)
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root

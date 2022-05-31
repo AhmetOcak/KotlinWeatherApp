@@ -13,13 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
+import com.kotlinweatherapp.data.WeatherViewModelFactory
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
 import com.kotlinweatherapp.utilities.Status
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
-import com.kotlinweatherapp.data.WeatherViewModelFactory
 import com.kotlinweatherapp.utilities.Constants
-import kotlin.system.exitProcess
-
 
 class WeatherFragment : Fragment() {
 
@@ -49,7 +47,7 @@ class WeatherFragment : Fragment() {
         val weatherViewModelFactory =
             WeatherViewModelFactory(cityName, locationData)
         viewModel =
-            ViewModelProvider(this, weatherViewModelFactory).get(WeatherViewModel::class.java)
+            ViewModelProvider(this, weatherViewModelFactory)[WeatherViewModel::class.java]
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner

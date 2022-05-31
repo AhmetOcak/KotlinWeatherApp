@@ -70,19 +70,20 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
         viewModelScope.launch {
             _status.value = Status.LOADING
             try {
-                if(_cityName.value.toString() == Constants.CITY_NAME_NULL) {
+                if (_cityName.value.toString() == Constants.CITY_NAME_NULL) {
                     _data.value = weatherRepository.getWeatherDataWithLocation(locationData)
                     checkDataAvailable()
-                }else {
-                    _data.value = weatherRepository.getWeatherDataWithCityName(_cityName.value.toString())
+                } else {
+                    _data.value =
+                        weatherRepository.getWeatherDataWithCityName(_cityName.value.toString())
                     checkDataAvailable()
                 }
-            }catch (e: UnknownHostException) {
+            } catch (e: UnknownHostException) {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorMessageVisibility.value = View.VISIBLE
                 _errorText.value = Constants.INTERNET_CONNECTION_ERROR
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorMessageVisibility.value = View.VISIBLE
