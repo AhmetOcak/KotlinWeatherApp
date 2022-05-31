@@ -21,6 +21,8 @@ You can enter your API key in the location specified in the Constants.kt file in
 
 [<li>ViewModel</li>](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
+[<li>Hilt</li>](https://developer.android.com/training/dependency-injection/hilt-android)
+
 ## Images from app
 
 ### GIF
