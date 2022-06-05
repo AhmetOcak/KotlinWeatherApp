@@ -1,4 +1,4 @@
-# WeatherApp
+# WeatherApp ☁🌧🌨🌩☀🌤🌪⛈🌥🌦🌫
 
 WeatherApp is an application that brings you daily weather conditions by city. Weather information of your current location is obtained automatically. You can find out by searching the weather information of the city you want. Openweathermap is used as API.
 
@@ -10,7 +10,7 @@ You can enter your API key in the location specified in the Constants.kt file in
   <img src="https://user-images.githubusercontent.com/73544434/170740599-6e093b39-661b-48c8-96c0-67eb572978bd.PNG"/>
 </p>
 
-## Libraries
+## Libraries 📚
 
 
 [<li>Navigation</li>](https://developer.android.com/guide/navigation)
@@ -23,7 +23,7 @@ You can enter your API key in the location specified in the Constants.kt file in
 
 [<li>Hilt</li>](https://developer.android.com/training/dependency-injection/hilt-android)
 
-## Images from app
+## Images from app 🖼
 
 ### GIF
 ![](https://media.giphy.com/media/NqlfBzlJeb6ROVajyq/giphy.gif)
