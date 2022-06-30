@@ -23,6 +23,8 @@ You can enter your API key in the location specified in the Constants.kt file in
 
 [<li>Hilt</li>](https://developer.android.com/training/dependency-injection/hilt-android)
 
+[<li>Room</li>](https://developer.android.com/jetpack/androidx/releases/room)
+
 ## Images from app 🖼
 
 ### GIF
