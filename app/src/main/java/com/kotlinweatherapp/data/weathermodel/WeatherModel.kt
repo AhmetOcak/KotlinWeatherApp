@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.data
+package com.kotlinweatherapp.data.weathermodel
 
 data class WeatherModel(
     val main: Main,

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.data.WeatherModel
+import com.kotlinweatherapp.data.weathermodel.WeatherModel
 import com.kotlinweatherapp.data.repo.WeatherRepository
 import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.utilities.Status

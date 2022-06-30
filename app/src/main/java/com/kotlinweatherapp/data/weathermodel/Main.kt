@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.data
+package com.kotlinweatherapp.data.weathermodel
 
 data class Main(
     val temp: Double,
