@@ -8,7 +8,7 @@ import retrofit2.Response
 import java.lang.Exception
 import java.net.UnknownHostException
 
-class WeatherRepository {
+object WeatherRepository {
 
     private val data = MutableLiveData<Response<WeatherModel>>()
 
