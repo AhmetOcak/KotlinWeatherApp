@@ -13,4 +13,5 @@
     <string name="city_not_found">City not found</string>
     <string name="lat_key">latitude</string>
     <string name="lon_key">longitude</string>
+    <string name="loc">location</string>
 </resources>
