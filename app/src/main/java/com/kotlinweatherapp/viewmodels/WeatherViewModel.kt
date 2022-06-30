@@ -1,13 +1,16 @@
 package com.kotlinweatherapp.viewmodels
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinweatherapp.data.LocationData
+import com.kotlinweatherapp.data.WeatherDataModel
 import com.kotlinweatherapp.data.weathermodel.WeatherModel
 import com.kotlinweatherapp.data.repo.WeatherRepository
+import com.kotlinweatherapp.db.WeatherDatabase
 import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.utilities.Status
 import kotlinx.coroutines.launch
@@ -17,9 +20,13 @@ import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherViewModel(city: String, private val locationData: LocationData) : ViewModel() {
+class WeatherViewModel(
+    city: String,
+    private val locationData: LocationData,
+    private val weatherDataDb: WeatherDatabase
+) : ViewModel() {
 
-    private val weatherRepository = WeatherRepository()
+    private val weatherRepository = WeatherRepository
 
     private val _cityName = MutableLiveData(city)
     val cityName: LiveData<String> get() = _cityName
@@ -59,6 +66,8 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
 
     private val _data = MutableLiveData<Response<WeatherModel>>()
 
+    private var _dataComingFromLoc: Boolean = false
+
     private val _errorText = MutableLiveData<String>()
     val errorText: LiveData<String> get() = _errorText
 
@@ -71,18 +80,27 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
             _status.value = Status.LOADING
             try {
                 if (_cityName.value.toString() == Constants.CITY_NAME_NULL) {
+                    _dataComingFromLoc = true
                     _data.value = weatherRepository.getWeatherDataWithLocation(locationData)
                     checkDataAvailable()
                 } else {
+                    _dataComingFromLoc = false
                     _data.value =
                         weatherRepository.getWeatherDataWithCityName(_cityName.value.toString())
                     checkDataAvailable()
                 }
             } catch (e: UnknownHostException) {
-                _status.value = Status.ERROR
-                _viewVisibility.value = View.GONE
-                _errorMessageVisibility.value = View.VISIBLE
-                _errorText.value = Constants.INTERNET_CONNECTION_ERROR
+                if (_dataComingFromLoc && weatherDataDb.weatherDao().getWeatherData() != null) {
+                    setWeatherDataFromDb()
+                    _status.value = Status.DONE
+                    _viewVisibility.value = View.VISIBLE
+                    _errorMessageVisibility.value = View.GONE
+                } else {
+                    _status.value = Status.ERROR
+                    _viewVisibility.value = View.GONE
+                    _errorMessageVisibility.value = View.VISIBLE
+                    _errorText.value = Constants.INTERNET_CONNECTION_ERROR
+                }
             } catch (e: Exception) {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
@@ -92,6 +110,7 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun readTimestamp(timestamp: Long): String? {
         val formatter = SimpleDateFormat("hh:mm")
         val calendar: Calendar = Calendar.getInstance()
@@ -113,11 +132,13 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
 
     private fun checkDataAvailable() {
         when {
-            _data.value?.code() == Constants.OK_CODE -> {
+            _data.value?.code() == Constants.OK_CODE || (_dataComingFromLoc && weatherDataDb.weatherDao()
+                .getWeatherData() != null) -> {
                 _status.value = Status.DONE
                 _viewVisibility.value = View.VISIBLE
                 _errorMessageVisibility.value = View.GONE
                 setWeatherData(_data.value!!.body()!!)
+                setWeatherDataToDb()
             }
             _data.value?.code() == Constants.NOT_FOUND_CODE -> {
                 _status.value = Status.ERROR
@@ -133,4 +154,36 @@ class WeatherViewModel(city: String, private val locationData: LocationData) : V
             }
         }
     }
+
+    private fun setWeatherDataToDb() {
+        if (_dataComingFromLoc && weatherDataDb.weatherDao().getWeatherData() == null) {
+            weatherDataDb.weatherDao().addWeatherData(
+                WeatherDataModel(
+                    0,
+                    _temp.value.toString(),
+                    _feelsLike.value.toString(),
+                    _pressure.value.toString(),
+                    _humidity.value.toString(),
+                    _windSpeed.value.toString(),
+                    _description.value.toString(),
+                    _sunrise.value.toString(),
+                    _sunset.value.toString(),
+                    _cityName.value.toString()
+                )
+            )
+        }
+    }
+
+    private fun setWeatherDataFromDb() {
+        _temp.value = weatherDataDb.weatherDao().getWeatherData().temp
+        _feelsLike.value = weatherDataDb.weatherDao().getWeatherData().feels_like
+        _pressure.value = weatherDataDb.weatherDao().getWeatherData().pressure
+        _humidity.value = weatherDataDb.weatherDao().getWeatherData().humidity
+        _windSpeed.value = weatherDataDb.weatherDao().getWeatherData().wind_speed
+        _description.value = weatherDataDb.weatherDao().getWeatherData().description
+        _sunrise.value = weatherDataDb.weatherDao().getWeatherData().sunrise
+        _sunset.value = weatherDataDb.weatherDao().getWeatherData().sunset
+        _cityName.value = weatherDataDb.weatherDao().getWeatherData().city_name
+    }
+
 }

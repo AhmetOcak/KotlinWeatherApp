@@ -22,6 +22,7 @@ import com.google.android.gms.location.*
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.databinding.FragmentGetLocationBinding
+import com.kotlinweatherapp.db.WeatherDatabase
 import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.viewmodels.GetLocationViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +36,8 @@ class GetLocationFragment : Fragment() {
     @Inject lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val viewModel: GetLocationViewModel by viewModels()
     private lateinit var locationData: LocationData
+    private lateinit var weatherDataDb: WeatherDatabase
+    private var refreshPage: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +49,12 @@ class GetLocationFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        weatherDataDb = WeatherDatabase.getWeatherDatabase(requireContext())!!
+        refreshPage = requireArguments().getBoolean(Constants.REFRESH_LOC)
+    }
+
     override fun onStart() {
         super.onStart()
         getLastLocation()
@@ -54,23 +63,29 @@ class GetLocationFragment : Fragment() {
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
         if (checkPermissions()) {
-            if (isLocationEnabled()) {
-                mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
-                    val location: Location? = task.result
-                    if (location == null) {
-                        requestNewLocationData()
-                        viewModel.setProgressBarVisibility(View.VISIBLE)
-                        getLastLocation()
-                    } else {
-                        viewModel.setProgressBarVisibility(View.VISIBLE)
-                        locationData = LocationData(location.latitude, location.longitude)
-                        goToNextScreen()
+            when {
+                isLocationEnabled() -> {
+                    mFusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                        val location: Location? = task.result
+                        if (location == null) {
+                            requestNewLocationData()
+                            viewModel.setProgressBarVisibility(View.VISIBLE)
+                            getLastLocation()
+                        } else {
+                            viewModel.setProgressBarVisibility(View.VISIBLE)
+                            locationData = LocationData(location.latitude, location.longitude)
+                            goToNextScreenWithLocData()
+                        }
                     }
                 }
-            } else {
-                Toast.makeText(requireContext(), "Turn on location", Toast.LENGTH_LONG).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
+                weatherDataDb.weatherDao().getWeatherData() == null || refreshPage -> {
+                    Toast.makeText(requireContext(), "Turn on location", Toast.LENGTH_LONG).show()
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }
+                !refreshPage -> {
+                    goToNextScreen()
+                }
             }
         } else {
             requestPermissions()
@@ -148,9 +163,13 @@ class GetLocationFragment : Fragment() {
         }
     }
 
-    private fun goToNextScreen() {
+    private fun goToNextScreenWithLocData() {
         findNavController().navigate(
             R.id.action_getLocationFragment_to_weatherFragment,
             Bundle().apply { putSerializable(Constants.LOCATION_DATA, locationData) })
+    }
+
+    private fun goToNextScreen() {
+        findNavController().navigate(R.id.action_getLocationFragment_to_weatherFragment)
     }
 }

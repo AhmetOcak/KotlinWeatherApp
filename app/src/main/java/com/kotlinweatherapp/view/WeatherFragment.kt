@@ -15,6 +15,7 @@ import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.data.WeatherViewModelFactory
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
+import com.kotlinweatherapp.db.WeatherDatabase
 import com.kotlinweatherapp.utilities.Status
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
 import com.kotlinweatherapp.utilities.Constants
@@ -26,6 +27,7 @@ class WeatherFragment : Fragment() {
     private lateinit var locationData: LocationData
     private lateinit var binding: FragmentWeatherBinding
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var weatherDataDb: WeatherDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,15 +43,17 @@ class WeatherFragment : Fragment() {
 
         sharedPref = activity?.getSharedPreferences("location_data", Context.MODE_PRIVATE)!!
         cityName = requireArguments().getString(Constants.CITY_NAME) ?: Constants.CITY_NAME_NULL
+        weatherDataDb = WeatherDatabase.getWeatherDatabase(requireContext())!!
 
         getLocationData()
 
         val weatherViewModelFactory =
-            WeatherViewModelFactory(cityName, locationData)
+            WeatherViewModelFactory(cityName, locationData, weatherDataDb)
         viewModel =
             ViewModelProvider(this, weatherViewModelFactory)[WeatherViewModel::class.java]
 
         binding.viewModel = viewModel
+        binding.fragmentWeather = this
         binding.lifecycleOwner = viewLifecycleOwner
         binding.searchButton.setOnClickListener {
             goToNextScreen()
@@ -70,6 +74,12 @@ class WeatherFragment : Fragment() {
 
     private fun goToNextScreen() {
         findNavController().navigate(R.id.action_weatherFragment_to_searchCityFragment)
+    }
+
+    fun refreshLocation() {
+        findNavController().navigate(
+            R.id.action_weatherFragment_to_getLocationFragment,
+            Bundle().apply { putBoolean(Constants.REFRESH_LOC, true) })
     }
 
     private fun onBackHandler() {
