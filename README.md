@@ -1,6 +1,6 @@
 # WeatherApp ☁🌧🌨🌩☀🌤🌪⛈🌥🌦🌫
 
-WeatherApp is an application that brings you daily weather conditions by city. Weather information of your current location is obtained automatically. You can find out by searching the weather information of the city you want. Openweathermap is used as API.
+WeatherApp is an application that brings you daily weather conditions by city. Weather information of your current location is obtained automatically. You can find out by searching the weather information of the city you want. Weather information received via location is cached. Openweathermap is used as API.
 
 <br/>
 
