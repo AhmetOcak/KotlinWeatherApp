@@ -19,6 +19,11 @@
         <argument
             android:name="locationData"
             app:argType="com.kotlinweatherapp.data.LocationData" />
+        <action
+            android:id="@+id/action_weatherFragment_to_getLocationFragment"
+            app:destination="@id/getLocationFragment"
+            app:popUpTo="@id/getLocationFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/searchCityFragment"
@@ -35,6 +40,9 @@
         android:name="com.kotlinweatherapp.view.GetLocationFragment"
         android:label="fragment_get_location"
         tools:layout="@layout/fragment_get_location" >
+        <argument
+            android:name="refresh location"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_getLocationFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
