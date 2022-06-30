@@ -7,13 +7,16 @@
         <variable
             name="viewModel"
             type="com.kotlinweatherapp.viewmodels.WeatherViewModel" />
+        <variable
+            name="fragment_weather"
+            type="com.kotlinweatherapp.view.WeatherFragment" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,8 +37,8 @@
         <ImageButton
             android:id="@+id/searchButton"
             style="@style/imageButtonStyle"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:contentDescription="@string/search_button_content"
             android:src="@drawable/ic_baseline_search"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +81,7 @@
             android:text="@{viewModel.description}"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:visibility="@{viewModel.viewVisibility}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cityName" />
 
@@ -250,6 +254,21 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/loc"
+            android:minHeight="48dp"
+            android:onClick="@{() -> fragment_weather.refreshLocation()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_location_on" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
