@@ -18,5 +18,6 @@ class Constants {
         const val OK_CODE = 200
         const val NOT_FOUND_CODE = 404
         const val UNAUTHORIZED_CODE = 401
+        const val REFRESH_LOC = "refresh location"
     }
 }
