@@ -32,7 +32,7 @@ You can enter your API key in the location specified in the Constants.kt file in
 ### Main screen
 
 <p align="left" width="100%">
-<img src="https://user-images.githubusercontent.com/73544434/170820998-0b824531-0de0-45d5-b591-9b2850e5ac2f.png" width="240" height="480"/>
+<img src="https://user-images.githubusercontent.com/73544434/176713827-a7cb5bba-480e-4b8f-b586-832ecc1b7cda.png" width="240" height="480"/>
 </p>
 
 ### Search city screen
@@ -44,9 +44,10 @@ You can enter your API key in the location specified in the Constants.kt file in
 ### Error screens
 
 <p align="left" width="100%">
-<img src="https://user-images.githubusercontent.com/73544434/170820894-b5776e92-dd44-450f-a528-ed3348846e1f.png" width="240" height="480"/>
-<img src="https://user-images.githubusercontent.com/73544434/170820935-ca6aaaf9-e3a4-4980-9fc9-bcdb91d6e100.png" width="240" height="480"/>
-<img src="https://user-images.githubusercontent.com/73544434/170820936-05a17379-e72d-455a-8c03-bab32c097b7b.png" width="240" height="480"/>
+
+<img src="https://user-images.githubusercontent.com/73544434/176713816-b16d1d7f-d0da-4024-8f04-f6058f16d7d0.png" width="240" height="480"/>
+<img src="https://user-images.githubusercontent.com/73544434/176713820-2a3490c0-b438-4e5b-bec7-6cd287058e6c.png" width="240" height="480"/>
+<img src="https://user-images.githubusercontent.com/73544434/176713834-791822c3-98a7-4f3b-a8b5-e54b7ad5e320.png" width="240" height="480"/>
 </p>
 
 
