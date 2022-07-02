@@ -1,6 +1,6 @@
 package com.kotlinweatherapp.api
 
-import com.kotlinweatherapp.data.weathermodel.WeatherModel
+import com.kotlinweatherapp.data.model.WeatherModel
 import com.kotlinweatherapp.utilities.Constants
 import retrofit2.Response
 import retrofit2.http.GET

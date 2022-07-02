@@ -1,6 +1,7 @@
-package com.kotlinweatherapp.data
+package com.kotlinweatherapp.utilities
 
 import androidx.room.*
+import com.kotlinweatherapp.data.model.WeatherDataModel
 
 @Dao
 interface WeatherDao {

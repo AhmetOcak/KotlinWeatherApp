@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.data
+package com.kotlinweatherapp.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

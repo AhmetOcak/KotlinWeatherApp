@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.data.WeatherViewModelFactory
+import com.kotlinweatherapp.utilities.WeatherViewModelFactory
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
 import com.kotlinweatherapp.db.WeatherDatabase
 import com.kotlinweatherapp.utilities.Status

@@ -1,9 +1,9 @@
-package com.kotlinweatherapp.data
+package com.kotlinweatherapp.utilities
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.db.WeatherDatabase
-import com.kotlinweatherapp.utilities.Constants
 import com.kotlinweatherapp.viewmodels.WeatherViewModel
 import java.lang.IllegalArgumentException
 

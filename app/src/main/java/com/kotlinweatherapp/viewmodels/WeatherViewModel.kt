@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.data.WeatherDataModel
-import com.kotlinweatherapp.data.weathermodel.WeatherModel
+import com.kotlinweatherapp.data.model.WeatherDataModel
+import com.kotlinweatherapp.data.model.WeatherModel
 import com.kotlinweatherapp.data.repo.WeatherRepository
 import com.kotlinweatherapp.db.WeatherDatabase
 import com.kotlinweatherapp.utilities.Constants
@@ -132,13 +132,11 @@ class WeatherViewModel(
 
     private fun checkDataAvailable() {
         when {
-            _data.value?.code() == Constants.OK_CODE || (_dataComingFromLoc && weatherDataDb.weatherDao()
-                .getWeatherData() != null) -> {
-                _status.value = Status.DONE
-                _viewVisibility.value = View.VISIBLE
-                _errorMessageVisibility.value = View.GONE
-                setWeatherData(_data.value!!.body()!!)
-                setWeatherDataToDb()
+            _data.value?.code() == Constants.UNAUTHORIZED_CODE -> {
+                _status.value = Status.ERROR
+                _viewVisibility.value = View.GONE
+                _errorText.value = Constants.UNAUTHORIZED_MESSAGE
+                _errorMessageVisibility.value = View.VISIBLE
             }
             _data.value?.code() == Constants.NOT_FOUND_CODE -> {
                 _status.value = Status.ERROR
@@ -146,11 +144,13 @@ class WeatherViewModel(
                 _errorText.value = Constants.CITY_NOT_FOUND_MESSAGE
                 _errorMessageVisibility.value = View.VISIBLE
             }
-            _data.value?.code() == Constants.UNAUTHORIZED_CODE -> {
-                _status.value = Status.ERROR
-                _viewVisibility.value = View.GONE
-                _errorText.value = Constants.UNAUTHORIZED_MESSAGE
-                _errorMessageVisibility.value = View.VISIBLE
+            _data.value?.code() == Constants.OK_CODE || (_dataComingFromLoc && weatherDataDb.weatherDao()
+                .getWeatherData() != null) -> {
+                _status.value = Status.DONE
+                _viewVisibility.value = View.VISIBLE
+                _errorMessageVisibility.value = View.GONE
+                setWeatherData(_data.value!!.body()!!)
+                setWeatherDataToDb()
             }
         }
     }
