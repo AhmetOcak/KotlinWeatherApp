@@ -29,4 +29,8 @@ object Constants {
         const val REFRESH_LOC = "refresh location"
         const val PERMISSION_ID = 101
     }
+
+    object Database {
+        const val DATABASE_NAME = "weather_data.db"
+    }
 }
