@@ -12,28 +12,28 @@ data class WeatherDataModel (
     var id: Int = 0,
 
     @ColumnInfo(name = "temp")
-    var temp: String,
+    var temp: Double,
 
     @ColumnInfo(name = "feels_like")
-    var feels_like: String,
+    var feels_like: Double,
 
     @ColumnInfo(name = "pressure")
-    var pressure: String,
+    var pressure: Double,
 
     @ColumnInfo(name = "humidity")
-    var humidity: String,
+    var humidity: Int,
 
     @ColumnInfo(name = "speed")
-    var wind_speed: String,
+    var wind_speed: Double,
 
     @ColumnInfo(name = "description")
     var description: String,
 
     @ColumnInfo(name = "sunrise")
-    var sunrise: String,
+    var sunrise: Long,
 
     @ColumnInfo(name = "sunset")
-    var sunset: String,
+    var sunset: Long,
 
     @ColumnInfo(name = "name")
     var city_name: String,

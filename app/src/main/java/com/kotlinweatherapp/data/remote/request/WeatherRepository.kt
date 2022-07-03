@@ -1,20 +1,29 @@
 package com.kotlinweatherapp.data.remote.request
 
-import androidx.lifecycle.MutableLiveData
 import com.kotlinweatherapp.data.LocationData
+import com.kotlinweatherapp.data.local.db.CacheMapper
+import com.kotlinweatherapp.data.local.db.dao.WeatherDao
 import com.kotlinweatherapp.data.model.WeatherModel
-import retrofit2.Response
+import com.kotlinweatherapp.data.service.weatherservice.WeatherApi
+import com.kotlinweatherapp.utils.Constants
 import java.lang.Exception
 import java.net.UnknownHostException
 
-object WeatherRepository {
-
-    private val data = MutableLiveData<Response<WeatherModel>>()
-
-    suspend fun getWeatherDataWithCityName(cityName: String): Response<WeatherModel> {
+class WeatherRepository(
+    //private val weatherDao: WeatherDao,
+    private val weatherApi: WeatherApi,
+    private val networkMapper: NetworkMapper,
+    //private val cacheMapper: CacheMapper
+) {
+    suspend fun getWeatherDataWithCityName(cityName: String): WeatherModel {
         try {
-            data.value = RetrofitInstance.getWeatherDataWithCityName(cityName)
-            return data.value!!
+            val weatherData = weatherApi.getWeatherDataWithCityName(
+                cityName,
+                Constants.NetworkService.API_KEY,
+                Constants.NetworkService.UNITS
+            )
+            StatusCode.statusCode = weatherData.code()
+            return networkMapper.mapFromEntity(weatherData.body()!!)
         } catch (e: UnknownHostException) {
             throw e
         } catch (e: Exception) {
@@ -22,10 +31,16 @@ object WeatherRepository {
         }
     }
 
-    suspend fun getWeatherDataWithLocation(locationData: LocationData): Response<WeatherModel> {
+    suspend fun getWeatherDataWithLocation(locationData: LocationData): WeatherModel {
         try {
-            data.value = RetrofitInstance.getWeatherDataWithLocation(locationData)
-            return data.value!!
+            val weatherData = weatherApi.getWeatherDataWithLocation(
+                locationData.latitude,
+                locationData.longitude,
+                Constants.NetworkService.API_KEY,
+                Constants.NetworkService.UNITS
+            )
+            StatusCode.statusCode = weatherData.code()
+            return networkMapper.mapFromEntity(weatherData.body()!!)
         } catch (e: UnknownHostException) {
             throw e
         } catch (e: Exception) {

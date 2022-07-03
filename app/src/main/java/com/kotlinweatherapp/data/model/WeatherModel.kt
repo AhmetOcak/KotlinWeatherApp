@@ -1,18 +1,16 @@
 package com.kotlinweatherapp.data.model
 
 data class WeatherModel(
-    val main: Main,
-    val wind: Wind,
-    val weather: List<Weather>,
-    val sys: Sys,
-    val name: String,
+    val weatherData: Main,
+    val windSpeed: Wind,
+    val weatherStatus: List<Weather>,
+    val sunTimes: Sys,
+    val cityName: String,
 )
 
 data class Main(
     val temp: Double,
-    val feels_like: Double,
-    val temp_min: Double,
-    val temp_max: Double,
+    val feelsLike: Double,
     val pressure: Double,
     val humidity: Int,
 )

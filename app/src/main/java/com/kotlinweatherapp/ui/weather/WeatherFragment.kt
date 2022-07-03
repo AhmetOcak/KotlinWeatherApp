@@ -9,20 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.utils.WeatherViewModelFactory
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
 import com.kotlinweatherapp.data.local.db.WeatherDatabase
 import com.kotlinweatherapp.utils.Status
 import com.kotlinweatherapp.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
 
-    private lateinit var viewModel: WeatherViewModel
-    private lateinit var cityName: String
+    private val viewModel: WeatherViewModel by viewModels()
+    private var cityName: String? = null
     private lateinit var locationData: LocationData
     private lateinit var binding: FragmentWeatherBinding
     private lateinit var sharedPref: SharedPreferences
@@ -42,15 +43,13 @@ class WeatherFragment : Fragment() {
 
         sharedPref = activity?.getSharedPreferences("location_data", Context.MODE_PRIVATE)!!
         cityName = requireArguments().getString(Constants.Strings.CITY_NAME)
-            ?: Constants.Strings.CITY_NAME_NULL
         weatherDataDb = WeatherDatabase.getWeatherDatabase(requireContext())!!
 
         getLocationData()
 
-        val weatherViewModelFactory =
-            WeatherViewModelFactory(cityName, locationData, weatherDataDb)
-        viewModel =
-            ViewModelProvider(this, weatherViewModelFactory)[WeatherViewModel::class.java]
+        viewModel.setCityName(cityName)
+        viewModel.setLocationData(locationData)
+        viewModel.getData()
 
         binding.viewModel = viewModel
         binding.fragmentWeather = this

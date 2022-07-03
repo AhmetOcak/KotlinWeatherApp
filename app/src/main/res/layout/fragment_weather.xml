@@ -187,7 +187,7 @@
 
                     <TextView
                         style="@style/weatherDataTextStyle"
-                        android:text="@{viewModel.sunrise}"
+                        android:text="@{viewModel.readTimestamp(viewModel.sunrise)}"
                         android:textAlignment="center" />
 
                     <TextView
@@ -209,7 +209,7 @@
 
                     <TextView
                         style="@style/weatherDataTextStyle"
-                        android:text="@{viewModel.sunset}"
+                        android:text="@{viewModel.readTimestamp(viewModel.sunset)}"
                         android:textAlignment="center" />
 
                     <TextView

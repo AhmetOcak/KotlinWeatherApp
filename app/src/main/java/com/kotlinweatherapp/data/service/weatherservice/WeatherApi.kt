@@ -1,6 +1,6 @@
 package com.kotlinweatherapp.data.service.weatherservice
 
-import com.kotlinweatherapp.data.model.WeatherModel
+import com.kotlinweatherapp.data.remote.response.WeatherEntity
 import com.kotlinweatherapp.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,7 +12,7 @@ interface WeatherApi {
         @Query("q") cityName: String,
         @Query("APPID") apikey: String,
         @Query("units") units: String,
-    ): Response<WeatherModel>
+    ): Response<WeatherEntity>
 
     @GET(Constants.NetworkService.END_POINT)
     suspend fun getWeatherDataWithLocation(
@@ -20,5 +20,5 @@ interface WeatherApi {
         @Query("lon") longitude: Double,
         @Query("APPID") apiKey: String,
         @Query("units") units: String,
-    ): Response<WeatherModel>
+    ): Response<WeatherEntity>
 }
