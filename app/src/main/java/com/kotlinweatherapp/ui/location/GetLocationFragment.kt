@@ -22,7 +22,7 @@ import com.google.android.gms.location.*
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.databinding.FragmentGetLocationBinding
-import com.kotlinweatherapp.db.WeatherDatabase
+import com.kotlinweatherapp.data.local.db.WeatherDatabase
 import com.kotlinweatherapp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

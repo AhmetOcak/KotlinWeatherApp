@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.db.entity.WeatherDataModel
+import com.kotlinweatherapp.data.local.db.entity.WeatherDataModel
 import com.kotlinweatherapp.data.model.WeatherModel
-import com.kotlinweatherapp.data.repo.WeatherRepository
-import com.kotlinweatherapp.db.WeatherDatabase
+import com.kotlinweatherapp.data.remote.request.WeatherRepository
+import com.kotlinweatherapp.data.local.db.WeatherDatabase
 import com.kotlinweatherapp.utils.Constants
 import com.kotlinweatherapp.utils.Status
 import kotlinx.coroutines.launch

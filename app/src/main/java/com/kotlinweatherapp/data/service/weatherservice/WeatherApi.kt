@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.api
+package com.kotlinweatherapp.data.service.weatherservice
 
 import com.kotlinweatherapp.data.model.WeatherModel
 import com.kotlinweatherapp.utils.Constants

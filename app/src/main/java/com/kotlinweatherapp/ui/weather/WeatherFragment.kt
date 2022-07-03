@@ -15,7 +15,7 @@ import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.utils.WeatherViewModelFactory
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
-import com.kotlinweatherapp.db.WeatherDatabase
+import com.kotlinweatherapp.data.local.db.WeatherDatabase
 import com.kotlinweatherapp.utils.Status
 import com.kotlinweatherapp.utils.Constants
 

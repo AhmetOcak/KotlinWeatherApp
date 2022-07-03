@@ -1,7 +1,8 @@
-package com.kotlinweatherapp.api
+package com.kotlinweatherapp.data.remote.request
 
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.data.model.WeatherModel
+import com.kotlinweatherapp.data.service.weatherservice.WeatherApi
 import com.kotlinweatherapp.utils.Constants
 import retrofit2.Response
 import retrofit2.Retrofit

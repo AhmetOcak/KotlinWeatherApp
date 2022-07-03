@@ -1,11 +1,11 @@
-package com.kotlinweatherapp.db
+package com.kotlinweatherapp.data.local.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kotlinweatherapp.db.dao.WeatherDao
-import com.kotlinweatherapp.db.entity.WeatherDataModel
+import com.kotlinweatherapp.data.local.db.dao.WeatherDao
+import com.kotlinweatherapp.data.local.db.entity.WeatherDataModel
 import com.kotlinweatherapp.utils.Constants
 
 @Database(entities = [WeatherDataModel::class], version = 1)

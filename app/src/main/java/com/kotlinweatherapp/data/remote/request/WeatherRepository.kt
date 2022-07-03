@@ -1,7 +1,6 @@
-package com.kotlinweatherapp.data.repo
+package com.kotlinweatherapp.data.remote.request
 
 import androidx.lifecycle.MutableLiveData
-import com.kotlinweatherapp.api.RetrofitInstance
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.data.model.WeatherModel
 import retrofit2.Response

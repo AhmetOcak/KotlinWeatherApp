@@ -3,7 +3,7 @@ package com.kotlinweatherapp.utils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.db.WeatherDatabase
+import com.kotlinweatherapp.data.local.db.WeatherDatabase
 import com.kotlinweatherapp.ui.weather.WeatherViewModel
 import java.lang.IllegalArgumentException
 
