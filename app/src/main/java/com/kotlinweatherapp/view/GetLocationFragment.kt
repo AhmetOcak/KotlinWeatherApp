@@ -52,7 +52,7 @@ class GetLocationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         weatherDataDb = WeatherDatabase.getWeatherDatabase(requireContext())!!
-        refreshPage = requireArguments().getBoolean(Constants.REFRESH_LOC)
+        refreshPage = requireArguments().getBoolean(Constants.Strings.REFRESH_LOC)
     }
 
     override fun onStart() {
@@ -145,7 +145,7 @@ class GetLocationFragment : Fragment() {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ),
-            Constants.PERMISSION_ID
+            Constants.Strings.PERMISSION_ID
         )
         getLastLocation()
     }
@@ -155,7 +155,7 @@ class GetLocationFragment : Fragment() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        if (requestCode == Constants.PERMISSION_ID) {
+        if (requestCode == Constants.Strings.PERMISSION_ID) {
             if (!(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 requireActivity().finish()
                 exitProcess(0)
@@ -166,7 +166,7 @@ class GetLocationFragment : Fragment() {
     private fun goToNextScreenWithLocData() {
         findNavController().navigate(
             R.id.action_getLocationFragment_to_weatherFragment,
-            Bundle().apply { putSerializable(Constants.LOCATION_DATA, locationData) })
+            Bundle().apply { putSerializable(Constants.Strings.LOCATION_DATA, locationData) })
     }
 
     private fun goToNextScreen() {

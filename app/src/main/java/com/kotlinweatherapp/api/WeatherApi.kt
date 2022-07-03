@@ -7,14 +7,14 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApi {
-    @GET(Constants.END_POINT)
+    @GET(Constants.NetworkService.END_POINT)
     suspend fun getWeatherDataWithCityName(
         @Query("q") cityName: String,
         @Query("APPID") apikey: String,
         @Query("units") units: String,
     ): Response<WeatherModel>
 
-    @GET(Constants.END_POINT)
+    @GET(Constants.NetworkService.END_POINT)
     suspend fun getWeatherDataWithLocation(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,

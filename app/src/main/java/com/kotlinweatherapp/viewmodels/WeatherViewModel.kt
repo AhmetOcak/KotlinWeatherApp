@@ -79,7 +79,7 @@ class WeatherViewModel(
         viewModelScope.launch {
             _status.value = Status.LOADING
             try {
-                if (_cityName.value.toString() == Constants.CITY_NAME_NULL) {
+                if (_cityName.value.toString() == Constants.Strings.CITY_NAME_NULL) {
                     _dataComingFromLoc = true
                     _data.value = weatherRepository.getWeatherDataWithLocation(locationData)
                     checkDataAvailable()
@@ -99,13 +99,13 @@ class WeatherViewModel(
                     _status.value = Status.ERROR
                     _viewVisibility.value = View.GONE
                     _errorMessageVisibility.value = View.VISIBLE
-                    _errorText.value = Constants.INTERNET_CONNECTION_ERROR
+                    _errorText.value = Constants.ErrorMessages.INTERNET_CONNECTION_ERROR
                 }
             } catch (e: Exception) {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
                 _errorMessageVisibility.value = View.VISIBLE
-                _errorText.value = Constants.ERROR_MESSAGE
+                _errorText.value = Constants.ErrorMessages.ERROR_MESSAGE
             }
         }
     }
@@ -132,19 +132,19 @@ class WeatherViewModel(
 
     private fun checkDataAvailable() {
         when {
-            _data.value?.code() == Constants.UNAUTHORIZED_CODE -> {
+            _data.value?.code() == Constants.StatusCodes.UNAUTHORIZED_CODE -> {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
-                _errorText.value = Constants.UNAUTHORIZED_MESSAGE
+                _errorText.value = Constants.ErrorMessages.UNAUTHORIZED_MESSAGE
                 _errorMessageVisibility.value = View.VISIBLE
             }
-            _data.value?.code() == Constants.NOT_FOUND_CODE -> {
+            _data.value?.code() == Constants.StatusCodes.NOT_FOUND_CODE -> {
                 _status.value = Status.ERROR
                 _viewVisibility.value = View.GONE
-                _errorText.value = Constants.CITY_NOT_FOUND_MESSAGE
+                _errorText.value = Constants.ErrorMessages.CITY_NOT_FOUND_MESSAGE
                 _errorMessageVisibility.value = View.VISIBLE
             }
-            _data.value?.code() == Constants.OK_CODE || (_dataComingFromLoc && weatherDataDb.weatherDao()
+            _data.value?.code() == Constants.StatusCodes.OK_CODE || (_dataComingFromLoc && weatherDataDb.weatherDao()
                 .getWeatherData() != null) -> {
                 _status.value = Status.DONE
                 _viewVisibility.value = View.VISIBLE

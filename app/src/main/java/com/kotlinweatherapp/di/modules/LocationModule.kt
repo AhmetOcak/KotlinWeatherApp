@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.di
+package com.kotlinweatherapp.di.modules
 
 import android.app.Application
 import com.google.android.gms.location.FusedLocationProviderClient

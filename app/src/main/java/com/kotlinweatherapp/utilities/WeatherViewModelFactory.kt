@@ -17,7 +17,7 @@ class WeatherViewModelFactory(
             @Suppress("UNCHECKED_CAST")
             return WeatherViewModel(city, locationData, weatherDataDb) as T
         } else {
-            throw IllegalArgumentException(Constants.EXCEPTION_MESSAGE)
+            throw IllegalArgumentException(Constants.ErrorMessages.EXCEPTION_MESSAGE)
         }
     }
 }

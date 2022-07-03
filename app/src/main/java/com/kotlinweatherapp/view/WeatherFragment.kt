@@ -42,7 +42,8 @@ class WeatherFragment : Fragment() {
         onBackHandler()
 
         sharedPref = activity?.getSharedPreferences("location_data", Context.MODE_PRIVATE)!!
-        cityName = requireArguments().getString(Constants.CITY_NAME) ?: Constants.CITY_NAME_NULL
+        cityName = requireArguments().getString(Constants.Strings.CITY_NAME)
+            ?: Constants.Strings.CITY_NAME_NULL
         weatherDataDb = WeatherDatabase.getWeatherDatabase(requireContext())!!
 
         getLocationData()
@@ -79,7 +80,7 @@ class WeatherFragment : Fragment() {
     fun refreshLocation() {
         findNavController().navigate(
             R.id.action_weatherFragment_to_getLocationFragment,
-            Bundle().apply { putBoolean(Constants.REFRESH_LOC, true) })
+            Bundle().apply { putBoolean(Constants.Strings.REFRESH_LOC, true) })
     }
 
     private fun onBackHandler() {
@@ -92,14 +93,14 @@ class WeatherFragment : Fragment() {
     }
 
     private fun getLocationData() {
-        if (requireArguments().getSerializable(Constants.LOCATION_DATA) == null) {
+        if (requireArguments().getSerializable(Constants.Strings.LOCATION_DATA) == null) {
             locationData = LocationData(
                 sharedPref.getFloat(getString(R.string.lat_key), 0.0F).toDouble(),
                 sharedPref.getFloat(getString(R.string.lon_key), 0.0F).toDouble()
             )
         } else {
             locationData =
-                requireArguments().getSerializable(Constants.LOCATION_DATA) as LocationData
+                requireArguments().getSerializable(Constants.Strings.LOCATION_DATA) as LocationData
             setLocDataToSharPref()
         }
     }

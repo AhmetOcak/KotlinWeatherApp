@@ -12,7 +12,7 @@ object RetrofitInstance {
 
     private val api: WeatherApi by lazy {
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.NetworkService.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
@@ -20,15 +20,19 @@ object RetrofitInstance {
     }
 
     suspend fun getWeatherDataWithCityName(cityName: String): Response<WeatherModel> {
-        return api.getWeatherDataWithCityName(cityName, Constants.API_KEY, Constants.UNITS)
+        return api.getWeatherDataWithCityName(
+            cityName,
+            Constants.NetworkService.API_KEY,
+            Constants.NetworkService.UNITS
+        )
     }
 
     suspend fun getWeatherDataWithLocation(locationData: LocationData): Response<WeatherModel> {
         return api.getWeatherDataWithLocation(
             locationData.latitude,
             locationData.longitude,
-            Constants.API_KEY,
-            Constants.UNITS
+            Constants.NetworkService.API_KEY,
+            Constants.NetworkService.UNITS
         )
     }
 }
