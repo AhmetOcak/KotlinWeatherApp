@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.view
+package com.kotlinweatherapp.ui.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.databinding.FragmentSearchCityBinding
-import com.kotlinweatherapp.viewmodels.SearchCityViewModel
 
 class SearchCityFragment : Fragment() {
 

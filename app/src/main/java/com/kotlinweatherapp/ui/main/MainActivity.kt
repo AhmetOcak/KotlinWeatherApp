@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.view
+package com.kotlinweatherapp.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

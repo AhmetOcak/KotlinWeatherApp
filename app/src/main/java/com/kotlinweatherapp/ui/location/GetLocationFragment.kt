@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.view
+package com.kotlinweatherapp.ui.location
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -23,8 +23,7 @@ import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.databinding.FragmentGetLocationBinding
 import com.kotlinweatherapp.db.WeatherDatabase
-import com.kotlinweatherapp.utilities.Constants
-import com.kotlinweatherapp.viewmodels.GetLocationViewModel
+import com.kotlinweatherapp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.system.exitProcess

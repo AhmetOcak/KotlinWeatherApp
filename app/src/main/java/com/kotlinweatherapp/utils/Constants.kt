@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.utilities
+package com.kotlinweatherapp.utils
 
 object Constants {
     object NetworkService {

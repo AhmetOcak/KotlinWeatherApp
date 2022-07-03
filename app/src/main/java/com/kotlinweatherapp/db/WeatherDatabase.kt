@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.kotlinweatherapp.db.dao.WeatherDao
 import com.kotlinweatherapp.db.entity.WeatherDataModel
-import com.kotlinweatherapp.utilities.Constants
+import com.kotlinweatherapp.utils.Constants
 
 @Database(entities = [WeatherDataModel::class], version = 1)
 abstract class WeatherDatabase : RoomDatabase() {

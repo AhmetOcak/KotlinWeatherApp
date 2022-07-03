@@ -6,10 +6,10 @@
     <data>
         <variable
             name="viewModel"
-            type="com.kotlinweatherapp.viewmodels.WeatherViewModel" />
+            type="com.kotlinweatherapp.ui.weather.WeatherViewModel" />
         <variable
             name="fragment_weather"
-            type="com.kotlinweatherapp.view.WeatherFragment" />
+            type="com.kotlinweatherapp.ui.weather.WeatherFragment" />
     </data>
 
 

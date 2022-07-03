@@ -2,7 +2,7 @@ package com.kotlinweatherapp.api
 
 import com.kotlinweatherapp.data.LocationData
 import com.kotlinweatherapp.data.model.WeatherModel
-import com.kotlinweatherapp.utilities.Constants
+import com.kotlinweatherapp.utils.Constants
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

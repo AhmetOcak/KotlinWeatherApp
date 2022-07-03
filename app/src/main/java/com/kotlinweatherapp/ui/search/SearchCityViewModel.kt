@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.viewmodels
+package com.kotlinweatherapp.ui.search
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.kotlinweatherapp.viewmodels.SearchCityViewModel" />
+            type="com.kotlinweatherapp.ui.search.SearchCityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.viewmodels
+package com.kotlinweatherapp.ui.location
 
 import android.view.View
 import androidx.lifecycle.LiveData

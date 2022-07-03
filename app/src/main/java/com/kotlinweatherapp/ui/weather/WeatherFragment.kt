@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.view
+package com.kotlinweatherapp.ui.weather
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,12 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.kotlinweatherapp.R
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.utilities.WeatherViewModelFactory
+import com.kotlinweatherapp.utils.WeatherViewModelFactory
 import com.kotlinweatherapp.databinding.FragmentWeatherBinding
 import com.kotlinweatherapp.db.WeatherDatabase
-import com.kotlinweatherapp.utilities.Status
-import com.kotlinweatherapp.viewmodels.WeatherViewModel
-import com.kotlinweatherapp.utilities.Constants
+import com.kotlinweatherapp.utils.Status
+import com.kotlinweatherapp.utils.Constants
 
 class WeatherFragment : Fragment() {
 

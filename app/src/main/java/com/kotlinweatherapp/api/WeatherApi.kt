@@ -1,7 +1,7 @@
 package com.kotlinweatherapp.api
 
 import com.kotlinweatherapp.data.model.WeatherModel
-import com.kotlinweatherapp.utilities.Constants
+import com.kotlinweatherapp.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

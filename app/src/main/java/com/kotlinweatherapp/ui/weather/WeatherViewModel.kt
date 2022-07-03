@@ -1,4 +1,4 @@
-package com.kotlinweatherapp.viewmodels
+package com.kotlinweatherapp.ui.weather
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -11,8 +11,8 @@ import com.kotlinweatherapp.db.entity.WeatherDataModel
 import com.kotlinweatherapp.data.model.WeatherModel
 import com.kotlinweatherapp.data.repo.WeatherRepository
 import com.kotlinweatherapp.db.WeatherDatabase
-import com.kotlinweatherapp.utilities.Constants
-import com.kotlinweatherapp.utilities.Status
+import com.kotlinweatherapp.utils.Constants
+import com.kotlinweatherapp.utils.Status
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception

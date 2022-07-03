@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.GetLocationFragment">
+    tools:context=".ui.location.GetLocationFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.kotlinweatherapp.viewmodels.GetLocationViewModel" />
+            type="com.kotlinweatherapp.ui.location.GetLocationViewModel" />
     </data>
 
 

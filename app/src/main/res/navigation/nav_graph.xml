@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.kotlinweatherapp.view.WeatherFragment"
+        android:name="com.kotlinweatherapp.ui.weather.WeatherFragment"
         android:label="fragment_weather"
         tools:layout="@layout/fragment_weather" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchCityFragment"
-        android:name="com.kotlinweatherapp.view.SearchCityFragment"
+        android:name="com.kotlinweatherapp.ui.search.SearchCityFragment"
         android:label="fragment_search_city" >
         <action
             android:id="@+id/action_searchCityFragment_to_weatherFragment"
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/getLocationFragment"
-        android:name="com.kotlinweatherapp.view.GetLocationFragment"
+        android:name="com.kotlinweatherapp.ui.location.GetLocationFragment"
         android:label="fragment_get_location"
         tools:layout="@layout/fragment_get_location" >
         <argument
