@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kotlinweatherapp.utilities.WeatherDao
-import com.kotlinweatherapp.data.model.WeatherDataModel
+import com.kotlinweatherapp.db.dao.WeatherDao
+import com.kotlinweatherapp.db.entity.WeatherDataModel
 
 @Database(entities = [WeatherDataModel::class], version = 1)
 abstract class WeatherDatabase : RoomDatabase() {
