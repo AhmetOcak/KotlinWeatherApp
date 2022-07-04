@@ -1,8 +1,6 @@
 package com.kotlinweatherapp.data.remote.request
 
 import com.kotlinweatherapp.data.LocationData
-import com.kotlinweatherapp.data.local.db.CacheMapper
-import com.kotlinweatherapp.data.local.db.dao.WeatherDao
 import com.kotlinweatherapp.data.model.WeatherModel
 import com.kotlinweatherapp.data.service.weatherservice.WeatherApi
 import com.kotlinweatherapp.utils.Constants

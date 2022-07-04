@@ -1,7 +1,5 @@
 package com.kotlinweatherapp.di.modules
 
-import com.kotlinweatherapp.data.local.db.CacheMapper
-import com.kotlinweatherapp.data.local.db.dao.WeatherDao
 import com.kotlinweatherapp.data.remote.request.NetworkMapper
 import com.kotlinweatherapp.data.remote.request.WeatherRepository
 import com.kotlinweatherapp.data.service.weatherservice.WeatherApi
