@@ -18,16 +18,12 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideRepository(
-        //weatherDao: WeatherDao,
         weatherApi: WeatherApi,
         networkMapper: NetworkMapper,
-        //cacheMapper: CacheMapper
     ): WeatherRepository {
         return WeatherRepository(
-            //weatherDao,
             weatherApi,
             networkMapper,
-            //cacheMapper
         )
     }
 }

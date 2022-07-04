@@ -10,10 +10,8 @@ import java.lang.Exception
 import java.net.UnknownHostException
 
 class WeatherRepository(
-    //private val weatherDao: WeatherDao,
     private val weatherApi: WeatherApi,
     private val networkMapper: NetworkMapper,
-    //private val cacheMapper: CacheMapper
 ) {
     suspend fun getWeatherDataWithCityName(cityName: String): WeatherModel? {
         try {
