@@ -114,6 +114,8 @@ class WeatherViewModel @Inject constructor(
                 _errorMessageVisibility.value = View.VISIBLE
                 _errorText.value = Constants.ErrorMessages.ERROR_MESSAGE
                 Log.e("e", e.toString())
+                Log.e("e", _data.toString())
+                Log.e("e", _data.value.toString())
             }
         }
     }

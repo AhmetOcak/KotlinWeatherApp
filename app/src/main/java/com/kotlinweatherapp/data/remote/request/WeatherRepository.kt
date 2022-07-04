@@ -15,7 +15,7 @@ class WeatherRepository(
     private val networkMapper: NetworkMapper,
     //private val cacheMapper: CacheMapper
 ) {
-    suspend fun getWeatherDataWithCityName(cityName: String): WeatherModel {
+    suspend fun getWeatherDataWithCityName(cityName: String): WeatherModel? {
         try {
             val weatherData = weatherApi.getWeatherDataWithCityName(
                 cityName,
@@ -23,7 +23,7 @@ class WeatherRepository(
                 Constants.NetworkService.UNITS
             )
             StatusCode.statusCode = weatherData.code()
-            return networkMapper.mapFromEntity(weatherData.body()!!)
+            return weatherData.body()?.let { networkMapper.mapFromEntity(it) }
         } catch (e: UnknownHostException) {
             throw e
         } catch (e: Exception) {
@@ -31,7 +31,7 @@ class WeatherRepository(
         }
     }
 
-    suspend fun getWeatherDataWithLocation(locationData: LocationData): WeatherModel {
+    suspend fun getWeatherDataWithLocation(locationData: LocationData): WeatherModel? {
         try {
             val weatherData = weatherApi.getWeatherDataWithLocation(
                 locationData.latitude,
@@ -40,7 +40,7 @@ class WeatherRepository(
                 Constants.NetworkService.UNITS
             )
             StatusCode.statusCode = weatherData.code()
-            return networkMapper.mapFromEntity(weatherData.body()!!)
+            return weatherData.body()?.let { networkMapper.mapFromEntity(it) }
         } catch (e: UnknownHostException) {
             throw e
         } catch (e: Exception) {
