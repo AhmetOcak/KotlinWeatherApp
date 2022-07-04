@@ -7,7 +7,7 @@ WeatherApp is an application that brings you daily weather conditions by city. W
 You can enter your API key in the location specified in the Constants.kt file in the utilites folder.
 
 <p align="left" width="100%">
-  <img src="https://user-images.githubusercontent.com/73544434/170740599-6e093b39-661b-48c8-96c0-67eb572978bd.PNG"/>
+  <img src="https://user-images.githubusercontent.com/73544434/177120956-60d42d2d-f05e-4fee-8a24-4d1deab164d1.PNG"/>
 </p>
 
 ## Libraries 📚
@@ -24,6 +24,84 @@ You can enter your API key in the location specified in the Constants.kt file in
 [<li>Hilt</li>](https://developer.android.com/training/dependency-injection/hilt-android)
 
 [<li>Room</li>](https://developer.android.com/jetpack/androidx/releases/room)
+
+## Project Structure 🏗
+
+```
+...
+kotlinweatherapp
+│
+└───data
+|   |
+|   └───local
+|   |   |
+|   |   └───db
+|   |   |     |
+|   |   |     └───dao
+|   |   |     |   |   WeatherDao.kt
+|   |   |     |
+|   |   |     └───entity
+|   |   |     |   |   WeatherDataModel.kt
+|   |   |     |
+|   |   |     |   CacheMapper.kt
+|   |   |     |   WeatherDatabase.kt
+|   |      
+|   └───model
+|   |   |   WeatherModel.kt
+|   |
+|   └───remote
+|   |   |
+|   |   └───request
+|   |   |   |   NetworkMapper.kt
+|   |   |   |   StatusCode.kt
+|   |   |   |   WeatherRepository.kt
+|   |   |
+|   |   └───response
+|   |   |   |   WeatherEntity.kt
+|   |
+|   └───service
+|   |   |
+|   |   └───weatherservice
+|   |   |   |   WeatherApi.kt
+|   |   
+|   |   LocationData.kt
+|
+└───di
+|   |
+|   └───modules
+|   |   |   LocationModule.kt
+|   |   |   RepositoryModule.kt
+|   |   |   RetrofitModule.kt
+|   |   |   RoomModule.kt
+|
+└───ui
+|   |
+|   └───location
+|   |   |   GetLocationFragment.kt
+|   |   |   GetLocationViewModel.kt
+|   |
+|   └───main
+|   |   |   MainActivity.kt
+|   |
+|   └───search
+|   |   |   SearchCityFragment.kt
+|   |   |   SearchCityViewModel.kt
+|   |
+|   └───weather
+|   |   |   WeatherFragment.kt
+|   |   |   WeatherViewModel.kt
+|
+└───utils
+|   |
+|   └───mapper
+|   |   |   EntityMapper.kt
+|   |
+|   |    Constant.kt
+|   |    Status.kt
+|
+|   WeatherApplication.kt
+
+```
 
 ## Images from app 🖼
 
