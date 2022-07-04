@@ -27,7 +27,6 @@ class WeatherFragment : Fragment() {
     private lateinit var locationData: LocationData
     private lateinit var binding: FragmentWeatherBinding
     private lateinit var sharedPref: SharedPreferences
-    private lateinit var weatherDataDb: WeatherDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +42,6 @@ class WeatherFragment : Fragment() {
 
         sharedPref = activity?.getSharedPreferences("location_data", Context.MODE_PRIVATE)!!
         cityName = requireArguments().getString(Constants.Strings.CITY_NAME)
-        weatherDataDb = WeatherDatabase.getWeatherDatabase(requireContext())!!
 
         getLocationData()
 

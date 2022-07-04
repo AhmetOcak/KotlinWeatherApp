@@ -35,7 +35,7 @@ class GetLocationFragment : Fragment() {
     @Inject lateinit var mFusedLocationClient: FusedLocationProviderClient
     private val viewModel: GetLocationViewModel by viewModels()
     private lateinit var locationData: LocationData
-    private lateinit var weatherDataDb: WeatherDatabase
+    @Inject lateinit var weatherDataDb: WeatherDatabase
     private var refreshPage: Boolean = false
 
     override fun onCreateView(
@@ -50,7 +50,6 @@ class GetLocationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        weatherDataDb = WeatherDatabase.getWeatherDatabase(requireContext())!!
         refreshPage = requireArguments().getBoolean(Constants.Strings.REFRESH_LOC)
     }
 
