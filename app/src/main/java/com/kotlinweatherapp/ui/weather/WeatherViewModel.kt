@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlinweatherapp.data.LocationData
+import com.kotlinweatherapp.data.local.db.CacheMapper
 import com.kotlinweatherapp.data.local.db.entity.WeatherDataModel
 import com.kotlinweatherapp.data.model.WeatherModel
 import com.kotlinweatherapp.data.remote.request.WeatherRepository
@@ -70,7 +71,7 @@ class WeatherViewModel @Inject constructor(
 
     private val _data = MutableLiveData<WeatherModel?>()
 
-    private var locationData: LocationData = LocationData(0.0,0.0)
+    private var locationData: LocationData = LocationData(0.0, 0.0)
 
     private var _dataComingFromLoc: Boolean = false
 
@@ -86,7 +87,7 @@ class WeatherViewModel @Inject constructor(
         viewModelScope.launch {
             _status.value = Status.LOADING
             try {
-                if (_cityName.value.isNullOrEmpty()){
+                if (_cityName.value.isNullOrEmpty()) {
                     _dataComingFromLoc = true
                     _data.value = weatherRepository.getWeatherDataWithLocation(locationData)
                     checkDataAvailable()
@@ -113,9 +114,6 @@ class WeatherViewModel @Inject constructor(
                 _viewVisibility.value = View.GONE
                 _errorMessageVisibility.value = View.VISIBLE
                 _errorText.value = Constants.ErrorMessages.ERROR_MESSAGE
-                Log.e("e", e.toString())
-                Log.e("e", _data.toString())
-                Log.e("e", _data.value.toString())
             }
         }
     }
@@ -166,34 +164,23 @@ class WeatherViewModel @Inject constructor(
     }
 
     private fun setWeatherDataToDb() {
-        if (_dataComingFromLoc && weatherDataDb.weatherDao().getWeatherData() == null) {
-            weatherDataDb.weatherDao().addWeatherData(
-                WeatherDataModel(
-                    0,
-                    _temp.value!!,
-                    _feelsLike.value!!,
-                    _pressure.value!!,
-                    _humidity.value!!,
-                    _windSpeed.value!!,
-                    _description.value.toString(),
-                    _sunrise.value!!,
-                    _sunset.value!!,
-                    _cityName.value.toString()
-                )
-            )
+        if (_dataComingFromLoc && weatherDataDb.weatherDao().getWeatherData() == null && _data.value != null) {
+            weatherDataDb.weatherDao().addWeatherData(CacheMapper().mapToEntity(_data.value!!))
         }
     }
 
     private fun setWeatherDataFromDb() {
-        _temp.value = weatherDataDb.weatherDao().getWeatherData().temp
-        _feelsLike.value = weatherDataDb.weatherDao().getWeatherData().feels_like
-        _pressure.value = weatherDataDb.weatherDao().getWeatherData().pressure
-        _humidity.value = weatherDataDb.weatherDao().getWeatherData().humidity
-        _windSpeed.value = weatherDataDb.weatherDao().getWeatherData().wind_speed
-        _description.value = weatherDataDb.weatherDao().getWeatherData().description
-        _sunrise.value = weatherDataDb.weatherDao().getWeatherData().sunrise
-        _sunset.value = weatherDataDb.weatherDao().getWeatherData().sunset
-        _cityName.value = weatherDataDb.weatherDao().getWeatherData().city_name
+        val cachedData = CacheMapper().mapFromEntity(weatherDataDb.weatherDao().getWeatherData())
+        _temp.value = cachedData.weatherData.temp.toInt().toDouble()
+        _feelsLike.value = cachedData.weatherData.feelsLike.toInt().toDouble()
+        _pressure.value = cachedData.weatherData.pressure
+        _humidity.value = cachedData.weatherData.humidity
+        _windSpeed.value = cachedData.windSpeed.speed
+        _description.value = cachedData.weatherStatus[0].description
+        _sunrise.value = cachedData.sunTimes.sunrise
+        _sunset.value = cachedData.sunTimes.sunset
+        _cityName.value = cachedData.cityName
+
     }
 
 }
