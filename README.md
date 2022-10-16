@@ -13,17 +13,17 @@ You can enter your API key in the location specified in the Constants.kt file in
 ## Libraries 📚
 
 
-[<li>Navigation</li>](https://developer.android.com/guide/navigation)
+* [Navigation](https://developer.android.com/guide/navigation)
 
-[<li>Retrofit</li>](https://square.github.io/retrofit)
+* [Retrofit](https://square.github.io/retrofit)
 
-[<li>Location</li>](https://developer.android.com/training/location)
+* [Location](https://developer.android.com/training/location)
 
-[<li>ViewModel</li>](https://developer.android.com/topic/libraries/architecture/viewmodel)
+* [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
-[<li>Hilt</li>](https://developer.android.com/training/dependency-injection/hilt-android)
+* [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 
-[<li>Room</li>](https://developer.android.com/jetpack/androidx/releases/room)
+* [Room](https://developer.android.com/jetpack/androidx/releases/room)
 
 ## Project Structure 🏗
 
